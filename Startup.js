@@ -14,7 +14,7 @@ class Startup
 
 	run()
 	{
-		this.setupRadio(); break;
+		this.setupRadio();
 	}
 
 	setupRadio()
@@ -25,7 +25,6 @@ class Startup
 		}
 		for (let i = 0; i < this.config.radios.length; i++) {
 			this.startRadio(this.config.radios[i]);
-			}
 		}
 		this.setupSignals();
 	}
