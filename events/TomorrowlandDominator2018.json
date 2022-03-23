@@ -1,0 +1,47 @@
+[
+	{
+		"stage": "tomorrowland",
+		"mc": "Villain",
+		"channel": "469913276592029706",
+		"emoji": ":one:",
+		"url": "https://live.tomorrowland.com/",
+		"sets": [
+			[ 21, 13, 0, "Demi Kanon" ],
+			[ 21, 14, 0, "Mandy & Adrenalize" ],
+			[ 21, 15, 0, "Audiotricz" ],
+			[ 21, 16, 0, "Da Tweekaz" ],
+			[ 21, 17, 0, "Wildstylez" ],
+			[ 21, 18, 0, "Brennan Heart" ],
+			[ 21, 19, 0, "Atmozfears" ],
+			[ 21, 20, 0, "Zatox" ],
+			[ 21, 21, 0, "Ran-D" ],
+			[ 21, 22, 0, "Sub Zero Project" ],
+			[ 21, 23, 0, "Korsakoff" ],
+				[ 22, 0, 0, "Nothing" ],
+
+			[ 28, 12, 0, "Ransom" ],
+			[ 28, 13, 0, "Refuzion" ],
+			[ 28, 14, 0, "Sound Rush" ],
+			[ 28, 15, 0, "Wasted Penguinz" ],
+			[ 28, 16, 0, "Mark With a K & MC Chucky" ],
+			[ 28, 17, 0, "Bass Modulators" ],
+			[ 28, 18, 0, "Code Black" ],
+			[ 28, 19, 0, "Noisecontrollers" ],
+			[ 28, 20, 0, "Psyko Punkz" ],
+			[ 28, 21, 0, "Frequencerz" ],
+			[ 28, 22, 0, "B-Front" ],
+			[ 28, 23, 0, "Partyraiser" ],
+				[ 29, 0, 0, "Nothing" ],
+
+			[ 29, 16, 0, "Da Tweekaz" ],
+			[ 29, 17, 0, "Wildstylez" ],
+			[ 29, 18, 0, "Coone" ],
+			[ 29, 19, 0, "Pablo Discobar" ],
+			[ 29, 19, 30, "Darren Styles" ],
+			[ 29, 20, 15, "Zatox" ],
+			[ 29, 21, 15, "Coone vs. Hard Driver" ],
+			[ 29, 22, 15, "Gunz for Hire" ],
+				[ 29, 23, 0, "Nothing" ]
+		]
+	}
+]
