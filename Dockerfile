@@ -1,16 +1,7 @@
-FROM python:3-alpine
+FROM python:3-bullseye
 
-RUN apk add --no-cache ffmpeg \
-    && apk add --no-cache --virtual .build-deps \
-        g++ \
-        gcc \
-        libgcc \
-        make \
-        autoconf \
-        libtool \
-        automake \
-        python3 \
-    && apk del .build-deps
+RUN apt update
+RUN apt install ffmpeg build-essential
 
 RUN pip --no-cache-dir install \
     discord.py \
