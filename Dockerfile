@@ -9,6 +9,4 @@ RUN pip --no-cache-dir install \
 
 WORKDIR /app
 
-ENV CONFIG_FILE="./config/config.ini"
-
 COPY . /app
