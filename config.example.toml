@@ -1,22 +1,7 @@
-[discord]
-token = "main_bot_token"
-timezone = "Europe/Amsterdam"
-logchannel = "647767937054277642"
-dmchannel = "736529983706628146"
-
-[filter]
-badwords = "(thepiratebay|badwords)"
-
-#[[modules.event]]
-#file = "events/Qlimax2019.json"
-
-#[[modules.eventquick]]
-#channel = "651911168650248208"
-
 [[radios]]
-token = "radio_bot_1_token"
-channel = "330121740758024193"
-name = "Q-dance Radio"
+token = "radio_bot_token"
+channel = "channel_id"
+name = "Example Radio"
 url = "http://example.net"
 
 [voice]
