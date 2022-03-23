@@ -352,7 +352,7 @@ class RedditRadio
 
 	onCmdGithub(msg)
 	{
-		msg.channel.send("My code is on Github! :robot: https://github.com/codecat/reddit-radio");
+		msg.channel.send("My code is on Github! :robot: https://github.com/deflax/radiobot");
 	}
 
 	/*
