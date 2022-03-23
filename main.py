@@ -1,7 +1,9 @@
+import os
 import discord
 from discord.ext.commands import Bot
 
-bot_version = "0.1"
+bot_version = os.environ['version']
+bot_token = os.environ['token']
 
 client = Bot(command_prefix="!")
 isPlaying = False
@@ -32,4 +34,4 @@ class MyClient(discord.Client):
             await self.voiceChannel.disconnect()
 
 client = MyClient()
-client.run('') # Get token for this shit
+client.run(bot_token) # Get token for this shit
