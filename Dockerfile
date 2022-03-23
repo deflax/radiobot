@@ -1,11 +1,5 @@
 FROM python:3
 
-RUN pip --no-cache-dir install \
-    discord.py
-    pynacl
-
-WORKDIR /app
-
 RUN apk add --no-cache ffmpeg \
     && apk add --no-cache --virtual .build-deps \
         g++ \
@@ -19,8 +13,12 @@ RUN apk add --no-cache ffmpeg \
     && npm install \
     && apk del .build-deps
 
+RUN pip --no-cache-dir install \
+    discord.py
+    pynacl
+
+WORKDIR /app
+
 ENV CONFIG_FILE="./config/config.ini"
 
 COPY . /app
-
-CMD ["node", "index.js"]
