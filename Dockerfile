@@ -10,7 +10,6 @@ RUN apk add --no-cache ffmpeg \
         libtool \
         automake \
         python3 \
-    && npm install \
     && apk del .build-deps
 
 RUN pip --no-cache-dir install \
