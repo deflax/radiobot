@@ -3,11 +3,12 @@ import discord
 from discord.ext.commands import Bot
 
 bot_version = os.environ['version']
+print('] radiobot ' + bot_version + ' starting')
+
 bot_token = os.environ['token']
 
-print('radiobot ' + bot_version + ' starting')
-
 client = Bot(command_prefix="!")
+
 isPlaying = False
 class MyClient(discord.Client):
 
@@ -15,14 +16,13 @@ class MyClient(discord.Client):
         print('Logged on as', self.user)
 
     async def on_message(self, message):
-        print('msg')
-
+        print (']' + message.author + '<'+message.content+'>')
         # don't respond to ourselves
         if message.author == self.user:
             return
 
         if message.content == 'version':
-            await message.channel.send('radiobot ' + bot_version)
+            await message.channel.send('] radiobot ' + bot_version)
 
     @client.event
     async def on_voice_state_update(self, member, before, after):
