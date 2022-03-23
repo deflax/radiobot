@@ -1,8 +1,10 @@
-FROM node:16-alpine
+FROM python:3
+
+RUN pip --no-cache-dir install \
+    discord.py
+    pynacl
 
 WORKDIR /app
-
-COPY ./package.json /app/package.json
 
 RUN apk add --no-cache ffmpeg \
     && apk add --no-cache --virtual .build-deps \
@@ -17,7 +19,7 @@ RUN apk add --no-cache ffmpeg \
     && npm install \
     && apk del .build-deps
 
-ENV CONFIG_FILE="./config/config.toml"
+ENV CONFIG_FILE="./config/config.ini"
 
 COPY . /app
 

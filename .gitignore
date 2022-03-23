@@ -1,9 +1,2 @@
 # Internal
-config/config.toml
-local/
-modules/livenp.js
-
-# Node
-node_modules/
-package-lock.json
-yarn.lock
+config/config.ini
