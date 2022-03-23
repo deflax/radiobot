@@ -1,7 +1,7 @@
 FROM python:3-bullseye
 
-RUN apt update
-RUN apt install ffmpeg build-essential
+RUN apt-get update
+RUN apt-get -yq install ffmpeg build-essential
 
 RUN pip --no-cache-dir install \
     discord.py \
