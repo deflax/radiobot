@@ -5,6 +5,8 @@ from discord.ext.commands import Bot
 bot_version = os.environ['version']
 bot_token = os.environ['token']
 
+print('radiobot ' + bot_version + ' starting')
+
 client = Bot(command_prefix="!")
 isPlaying = False
 class MyClient(discord.Client):
@@ -13,6 +15,8 @@ class MyClient(discord.Client):
         print('Logged on as', self.user)
 
     async def on_message(self, message):
+        print('msg')
+
         # don't respond to ourselves
         if message.author == self.user:
             return
