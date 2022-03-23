@@ -14,7 +14,7 @@ RUN apk add --no-cache ffmpeg \
     && apk del .build-deps
 
 RUN pip --no-cache-dir install \
-    discord.py
+    discord.py \
     pynacl
 
 WORKDIR /app
