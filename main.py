@@ -16,8 +16,8 @@ description = '''Radiobot'''
 bot = commands.Bot(command_prefix='!', description=description)
 
 # Initialize opus
-if not discord.opus.is_loaded():
-    discord.opus.load_opus('opus')
+#if not discord.opus.is_loaded():
+#    discord.opus.load_opus('opus')
 
 # Initialize some global variables
 voice_client = None
