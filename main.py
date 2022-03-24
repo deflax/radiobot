@@ -9,10 +9,10 @@ print('radiobot ' + bot_version + ' starting')
 
 login_token = os.environ['token']
 voice_channel_id = os.environ['channel_voice']
-text_channel_id = config['channel_test']
+text_channel_id = os.environ['channel_text']
 
 # Configure the bot
-description = '''Radiobot.'''
+description = '''Radiobot'''
 bot = commands.Bot(command_prefix='!', description=description)
 
 # Initialize opus
@@ -34,10 +34,10 @@ async def on_ready():
     # get channels
     voice_channel = bot.get_channel(voice_channel_id)
     text_channel = bot.get_channel(text_channel_id)
-    if not v_channel:
-        print("No voice channel with that ID found!")
+    if not voice_channel:
+        print("No voice channel " + voice_channel_id + " found!")
     if not text_channel:
-        print("No text channel with that ID found!")
+        print("No text channel " + text_channel_id + " found!")
     #voice_client = await bot.join_voice_channel(v_channel)
 
 @bot.event
