@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get -yq install ffmpeg build-essential
 
 RUN pip --no-cache-dir install \
-    discord.py \
+    discord.py[voice] \
     pynacl
 
 WORKDIR /app
