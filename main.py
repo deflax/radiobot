@@ -56,8 +56,8 @@ async def on_message(message):
 
 @bot.event
 async def on_voice_state_update(member, before, after):
-    print("User connected to " + str(after.channel.id))
-    if after.channel.id == [voice_channel_id]:
+    print("User noticed on " + str(after.channel.id))
+    if str(after.channel.id) == voice_channel_id:
         clients_before = len(before.channel.members)
 
         # If nobody in the channel based on before, invoke join the channel
