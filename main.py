@@ -41,28 +41,35 @@ async def on_ready():
     #voice_client = await bot.join_voice_channel(v_channel)
 
 @bot.event
-async def on_message(ctx):
+async def on_message(message):
     # don't respond to ourselves
-    if ctx.message.author == ctx.user:
+    if message.author == bot.user:
         return
 
-    print ('<' + ctx.message.author.nick + '> ' + ctx.message.content)
+    print ('<' + message.author.nick + '> ' + message.content)
 
-    if ctx.message.content == '!version':
-        await ctx.message.channel.send('] radiobot ' + bot_version + ' - python: ' + os.environ['PYTHON_VERSION'])
+    if message.content == '!version':
+        await message.channel.send('] radiobot ' + bot_version + ' - python: ' + os.environ['PYTHON_VERSION'])
 
 @bot.event
 async def on_voice_state_update(member, before, after):
-    clients_before = len(ctx.before.channel.members)
+    if before.channel is None and after.channel is not None:
+        if after.channel.id == [voice_channel_id]:
+            clients_before = len(before.channel.members)
 
-    # If nobody in the channel based on before, invoke join the channel
-    if clients_before == 0:
-        voiceChannel = await after.channel.connect()
+            # If nobody in the channel based on before, invoke join the channel
+            if clients_before == 0:
+                voiceChannel = await after.channel.connect()
 
-    # if after join channel members > 0, join the channel
-    if clients_before == 1:
-        print("gg")
-        await voiceChannel.disconnect()
+            # if channel members > 0, leave the channel
+            if clients_before == 1:
+                print("gg")
+                await voiceChannel.disconnect()
 
-bot.run(bot_token) # Get token for this shit
+# Start the bot with multiprocess compatiblity
+if __name__ == "__main__":
+    try:
+        bot.loop.run_until_complete(bot.start(login_token))
+    finally:
+        bot.loop.close()
 
