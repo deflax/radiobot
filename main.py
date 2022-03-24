@@ -16,7 +16,7 @@ class MyClient(discord.Client):
         print('Logged on as', self.user)
 
     async def on_message(self, message):
-        print (']' + message.author + '<'+message.content+'>')
+        print (']' + message.author.nick + '<' + message.content + '>')
         # don't respond to ourselves
         if message.author == self.user:
             return
