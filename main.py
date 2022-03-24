@@ -46,25 +46,29 @@ async def on_message(message):
     if message.author == bot.user:
         return
 
-    print ('<' + message.author.nick + '> ' + message.content)
+    if not str(message.channel.id) == text_channel_id:
+        return
+
+    print('<' + message.author.nick + '> ' + message.content)
 
     if message.content == '!version':
-        await message.channel.send('] radiobot ' + bot_version + ' - python: ' + os.environ['PYTHON_VERSION'])
+        await message.channel.send('] radiobot ' + bot_version + ' - python ' + os.environ['PYTHON_VERSION'])
 
 @bot.event
 async def on_voice_state_update(member, before, after):
-    if before.channel is None and after.channel is not None:
-        if after.channel.id == [voice_channel_id]:
-            clients_before = len(before.channel.members)
+    print("User connected to " + str(after.channel.id))
+    if after.channel.id == [voice_channel_id]:
+        clients_before = len(before.channel.members)
 
-            # If nobody in the channel based on before, invoke join the channel
-            if clients_before == 0:
-                voiceChannel = await after.channel.connect()
+        # If nobody in the channel based on before, invoke join the channel
+        if clients_before == 0:
+            print("Connecting to voice channel " + voice_channel_id)
+            voiceChannel = await after.channel.connect()
 
-            # if channel members > 0, leave the channel
-            if clients_before == 1:
-                print("gg")
-                await voiceChannel.disconnect()
+        # if channel members > 0, leave the channel
+        if clients_before == 1:
+            print("Disconnecting from voice channel " + voice_channel_id)
+            await voiceChannel.disconnect()
 
 # Start the bot with multiprocess compatiblity
 if __name__ == "__main__":
