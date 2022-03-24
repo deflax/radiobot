@@ -3,25 +3,26 @@ import discord
 from discord.ext.commands import Bot
 
 bot_version = os.environ['version']
-print('] radiobot ' + bot_version + ' starting')
+print('radiobot ' + bot_version + ' starting')
 
 bot_token = os.environ['token']
 
 client = Bot(command_prefix="!")
 
 isPlaying = False
-class MyClient(discord.Client):
+class Radio(discord.Client):
 
     async def on_ready(self):
         print('Logged on as', self.user)
 
     async def on_message(self, message):
-        print (']' + message.author.nick + '<' + message.content + '>')
         # don't respond to ourselves
         if message.author == self.user:
             return
 
-        if message.content == 'version':
+        print ('<' + message.author.nick + '> ' + message.content)
+
+        if message.content == '!version':
             await message.channel.send('] radiobot ' + bot_version)
 
     @client.event
@@ -37,5 +38,5 @@ class MyClient(discord.Client):
             print("gg")
             await self.voiceChannel.disconnect()
 
-client = MyClient()
-client.run(bot_token) # Get token for this shit
+client = Radio()
+client.run(bot_token) # Get tokeun for this shit
