@@ -26,19 +26,15 @@ isPlaying = False
 
 @bot.event
 async def on_ready():
-    print('Logged in as')
-    print(bot.user.name)
-    print(bot.user.id)
-    print('------')
+    print('Logged in as ' + bot.user.name + ' #' + str(bot.user.id))
 
     # get channels
-    voice_channel = bot.get_channel(voice_channel_id)
-    text_channel = bot.get_channel(text_channel_id)
-    if not voice_channel:
-        print("No voice channel " + voice_channel_id + " found!")
-    if not text_channel:
-        print("No text channel " + text_channel_id + " found!")
-    #voice_client = await bot.join_voice_channel(v_channel)
+    #voice_channel = bot.get_channel(voice_channel_id)
+    #text_channel = bot.get_channel(text_channel_id)
+    #if not voice_channel:
+    #    print("No voice channel " + voice_channel_id + " found!")
+    #if not text_channel:
+    #    print("No text channel " + text_channel_id + " found!")
 
 @bot.event
 async def on_message(message):
@@ -56,19 +52,37 @@ async def on_message(message):
 
 @bot.event
 async def on_voice_state_update(member, before, after):
-    print("User noticed on " + str(after.channel.id))
-    if str(after.channel.id) == voice_channel_id:
-        clients_before = len(before.channel.members)
+    """
+    Starts events when a user changes their voice state.
+    Such as connecting, disconnecting and moving between channels.
+    :type member: discord.Member
+    :type before: discord.VoiceState
+    :type after: discord.VoiceState
+    :param member: The member that changed their voice state.
+    :param before: The member as they were before the change.
+    :param after: The member as they are after the change.
+    :return:
+    """
+    if member.bot:
+        print("self event detection")
+        return
 
-        # If nobody in the channel based on before, invoke join the channel
-        if clients_before == 0:
+    if str(before.voice_channel) == "None":
+        print(after.name + " joined " + str(after.voice_channel))
+        if str(after.channel.id) == voice_channel_id:
             print("Connecting to voice channel " + voice_channel_id)
             voiceChannel = await after.channel.connect()
 
-        # if channel members > 0, leave the channel
-        if clients_before == 1:
-            print("Disconnecting from voice channel " + voice_channel_id)
-            await voiceChannel.disconnect()
+    
+    elif str(after.voice_channel) == "None":
+        print(after.name + " left " + str(before.voice_channel))
+        print("Disconnecting from voice channel " + voice_channel_id)
+        voiceChannel = await after.channel.connect()
+        await voiceChannel.disconnect()
+
+    else:
+        return
+
 
 # Start the bot with multiprocess compatiblity
 if __name__ == "__main__":
