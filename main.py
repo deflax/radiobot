@@ -66,25 +66,30 @@ async def on_voice_state_update(member, before, after):
     :return:
     """
     global isConnected
+
+    if member.bot:
+        #print("[INFO] self event detection")
+        return
     
     voice_channel = await bot.fetch_channel(voice_channel_id)
     member_ids = len(voice_channel.voice_states.keys())
 
     debug_channel = await bot.fetch_channel(text_channel_id)
 
-    if member_ids > 0:
-        await debug_channel.send('] voice activity.  voice #' + voice_channel_id + ' member count: ' + str(member_ids))
+    await debug_channel.send('] voice #' + voice_channel_id + ' member count: ' + str(member_ids))
 
-    if member_ids > 1 and not isConnected:
+    if member_ids == 1 and isConnected == False:
+        isConnected = True
         await debug_channel.send('] connecting to #' + voice_channel_id)
         voiceChannel = await voice_channel.connect()
-        isConnected = True
+        return
 
-    if member_ids == 1 and isConnected:
-        await debug_channel.send('] disconnecting from #' + voice_channel_id)
-        voiceChannel = await voice_channel.connect()
-        await voiceChannel.disconnect()
+    if member_ids == 1 and isConnected == True:
         isConnected = False
+        await debug_channel.send('] disconnecting from #' + voice_channel_id)
+        for x in bot.voice_clients:
+            await x.disconnect()
+        return
 
 # Start the bot with multiprocess compatiblity
 if __name__ == "__main__":
