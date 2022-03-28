@@ -97,20 +97,24 @@ async def on_voice_state_update(member, before, after):
         #print("[INFO] self event detection")
         return
     
-    voice_channel = await bot.fetch_channel(voice_channel_id)
     debug_channel = await bot.fetch_channel(text_channel_id)
-
+    voice_channel = await bot.fetch_channel(voice_channel_id)
     member_ids = len(voice_channel.voice_states.keys())
 
-    try:
-        if str(before.channel.id) == str(voice_channel_id):
-            member_msg = str(member.nick) + ' is in the void :eight_pointed_black_star:'
-        if str(after.channel.id) == str(voice_channel_id):
-            member_msg = str(member.nick) + ' enjoys! :star:'
-        print('[INFO] ' + member_msg)
-        #await debug_channel.send(member_msd)
-    except:
-        pass
+    if before.channel is None:
+        prev_chan = "not_found"
+    else:
+        prev_chan = str(before.channel.id)
+    if prev_chan == str(voice_channel_id):
+        member_msg = str(member.nick) + ' is in the void :eight_pointed_black_star:'
+    if after.channel is None:
+        next_chan = "not_found"
+    else:
+        next_chan = str(after.channel.id)
+    if next_chan == str(voice_channel_id):
+        member_msg = str(member.nick) + ' enjoys! :star:'
+    print('[INFO] ' + member_msg)
+    #await debug_channel.send(member_msd)
 
     if member_ids > 0 and isConnected == False:
         isConnected = True
