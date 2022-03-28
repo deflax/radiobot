@@ -50,7 +50,7 @@ async def on_message(message):
     print('<' + message.author.nick + '> ' + message.content)
 
     if message.content == '!version':
-        await message.channel.send('] radiobot ' + bot_version + ' - python ' + os.environ['PYTHON_VERSION'])
+        await message.channel.send('] radiobot ' + bot_version + ' - python ' + os.environ['PYTHON_VERSION'] + ' - https://github.com/deflax/radiobot :purple_heart:')
 
 @bot.event
 async def on_voice_state_update(member, before, after):
