@@ -38,7 +38,7 @@ async def on_ready():
         print("[WARN] No voice channel " + voice_channel_id + " found!")
     if not debug_channel:
         print("[WARN] No text channel " + text_channel_id + " found!")
-    await debug_channel.send('] ready.')
+    await debug_channel.send('] ready. :satellite_orbital:')
 
 @bot.event
 async def on_message(message):
@@ -52,7 +52,7 @@ async def on_message(message):
     print('<' + message.author.nick + '> ' + message.content)
 
     if message.content == '!help':
-        await message.channel.send('] radiobot commands: help, version, song')
+        await message.channel.send('] radiobot commands: help, version, song :star:')
 
     if message.content == '!version':
         await message.channel.send('] radiobot ' + bot_version + ' - python ' + os.environ['PYTHON_VERSION'] + ' - github.com/deflax/radiobot :purple_heart:')
@@ -115,20 +115,20 @@ async def on_voice_state_update(member, before, after):
     else:
         next_chan = str(after.channel.id)
     if next_chan == str(voice_channel_id):
-        member_msg = str(member.nick) + ' enjoys! :star:'
+        member_msg = str(member.nick) + ' enjoys! :satellite:'
         print('[INFO] ' + member_msg)
         await debug_channel.send('] ' + member_msg)
 
     if member_ids > 0 and isConnected == False:
         isConnected = True
-        await debug_channel.send('] connecting to #' + voice_channel_idi + ' :sattelite:')
+        #await debug_channel.send('] connecting to #' + voice_channel_id + ' :satellite_orbital:')
         voice_client = await voice_channel.connect()
         player = voice_client.play(discord.FFmpegPCMAudio(source, **FFMPEG_OPTS))
         return
 
     if member_ids == 1 and isConnected == True:
         isConnected = False
-        await debug_channel.send('] disconnecting from #' + voice_channel_id + ' :sattelite_orbital:')
+        #await debug_channel.send('] disconnecting from #' + voice_channel_id + ' :satellite_orbital:')
         for voice_client in bot.voice_clients:
             await voice_client.disconnect()
         return
