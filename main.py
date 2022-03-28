@@ -75,7 +75,7 @@ async def on_message(message):
             return
         meta = title.decode(encoding, errors='replace')
         metasplit = meta.split('*', 1)[0]
-        await message.channel.send('] ' + metasplit)
+        await message.channel.send('] ' + metasplit + ' :musical_note:')
 
 @bot.event
 async def on_voice_state_update(member, before, after):
@@ -106,7 +106,7 @@ async def on_voice_state_update(member, before, after):
     else:
         prev_chan = str(before.channel.id)
     if prev_chan == str(voice_channel_id):
-        member_msg = str(member.nick) + ' is back to the void :cyclone:'
+        member_msg = str(member.nick) + ' is back in the void :cyclone:'
         print('[INFO] ' + member_msg)
         await debug_channel.send('] ' + member_msg)
 
@@ -121,14 +121,14 @@ async def on_voice_state_update(member, before, after):
 
     if member_ids > 0 and isConnected == False:
         isConnected = True
-        await debug_channel.send('] connecting to #' + voice_channel_id)
+        await debug_channel.send('] connecting to #' + voice_channel_idi + ' :sattelite:')
         voice_client = await voice_channel.connect()
         player = voice_client.play(discord.FFmpegPCMAudio(source, **FFMPEG_OPTS))
         return
 
     if member_ids == 1 and isConnected == True:
         isConnected = False
-        await debug_channel.send('] disconnecting from #' + voice_channel_id)
+        await debug_channel.send('] disconnecting from #' + voice_channel_id + ' :sattelite_orbital:')
         for voice_client in bot.voice_clients:
             await voice_client.disconnect()
         return
