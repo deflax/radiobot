@@ -38,7 +38,7 @@ async def on_ready():
         print("[WARN] No voice channel " + voice_channel_id + " found!")
     if not debug_channel:
         print("[WARN] No text channel " + text_channel_id + " found!")
-    await debug_channel.send('] ready. :satellite_orbital:')
+    #await debug_channel.send('] ready. :satellite_orbital:')
 
 @bot.event
 async def on_message(message):
