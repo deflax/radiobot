@@ -55,7 +55,7 @@ async def on_message(message):
         await message.channel.send('] radiobot commands: help, version, song')
 
     if message.content == '!version':
-        await message.channel.send('] radiobot ' + bot_version + ' - python ' + os.environ['PYTHON_VERSION'] + ' - https://github.com/deflax/radiobot :purple_heart:')
+        await message.channel.send('] radiobot ' + bot_version + ' - python ' + os.environ['PYTHON_VERSION'] + ' - github.com/deflax/radiobot :purple_heart:')
 
     if message.content == '!song':
         request = urllib2.Request(source, headers={'Icy-MetaData': 1})  # request metadata
