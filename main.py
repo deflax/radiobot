@@ -79,8 +79,8 @@ async def on_voice_state_update(member, before, after):
     return    
 
     if str(after.channel.id) == voice_channel_id:
-            print("Connecting to voice channel " + voice_channel_id)
-            voiceChannel = await voice_channel.connect()
+        print("Connecting to voice channel " + voice_channel_id)
+        voiceChannel = await voice_channel.connect()
    
         print("Disconnecting from voice channel " + voice_channel_id)
         voiceChannel = await after.channel.connect()
