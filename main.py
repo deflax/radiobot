@@ -117,7 +117,8 @@ async def on_voice_state_update(member, before, after):
         member_msg = str(member.nick) + ' enjoys! :satellite:'
 
     if prev_chan == next_chan:
-        print('[INFO] ' + str(member.nick) + ' activity')
+        #print('[INFO] ' + str(member.nick) + ' activity')
+        pass
     else:
         if member_msg is not None:
             print('[INFO] ' + member_msg)
