@@ -63,24 +63,25 @@ async def on_voice_state_update(member, before, after):
     :param after: The member as they are after the change.
     :return:
     """
-    print('before: ' + str(before))
-    print('after: ' + str(after))
-    return
-    clients_before = len(before.channel.members)
+    #print('before: ' + str(before))
+    #print('after: ' + str(after))
+    #return
     
     if member.bot:
         print("self event detection")
         return
-
-    if str(before.voice_channel) == "None":
-        print(after.name + " joined " + str(after.voice_channel))
-        if str(after.channel.id) == voice_channel_id:
-            print("Connecting to voice channel " + voice_channel_id)
-            voiceChannel = await after.channel.connect()
-
     
-    elif str(after.voice_channel) == "None":
-        print(after.name + " left " + str(before.voice_channel))
+    debug_channel = bot.get_channel(text_channel_id)
+    voice_channel = bot.get_channel(voice_channel_id)
+    member_ids = voice_channel.voice_states.keys()
+    
+    await debug_channel.send('voice activity')
+    return    
+
+    if str(after.channel.id) == voice_channel_id:
+            print("Connecting to voice channel " + voice_channel_id)
+            voiceChannel = await voice_channel.connect()
+   
         print("Disconnecting from voice channel " + voice_channel_id)
         voiceChannel = await after.channel.connect()
         await voiceChannel.disconnect()
