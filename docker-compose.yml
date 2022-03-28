@@ -9,11 +9,3 @@ services:
       - radiobot.env
     command: python3 -u main.py
     restart: always
-  relay:
-    image: infiniteproject/icecast
-    env_file:
-      - relay.env
-    ports:
-      - 8000:8000
-    restart: always
-
