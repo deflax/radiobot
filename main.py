@@ -102,7 +102,11 @@ async def on_voice_state_update(member, before, after):
 
     member_ids = len(voice_channel.voice_states.keys())
 
-    #await debug_channel.send('] voice #' + voice_channel_id + ' member count: ' + str(member_ids))
+    try:
+        if str(after.channel.id) == str(voice_channel_id):
+            await debug_channel.send(str(member.nick) + ' enjoys! :eight_pointed_black_star:')
+    except:
+        pass
 
     if member_ids > 0 and isConnected == False:
         isConnected = True
