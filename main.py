@@ -53,7 +53,10 @@ async def on_message(ctx):
 
 @bot.event
 async def on_voice_state_update(member, before, after):
-    clients_before = len(ctx.before.channel.members)
+    print('before: ' + str(before))
+    print('after: ' + str(after))
+    return
+    clients_before = len(before.channel.members)
 
     # If nobody in the channel based on before, invoke join the channel
     if clients_before == 0:
@@ -64,5 +67,4 @@ async def on_voice_state_update(member, before, after):
         print("gg")
         await voiceChannel.disconnect()
 
-bot.run(bot_token) # Get token for this shit
-
+bot.run(login_token) # Get token for this shit
