@@ -66,33 +66,31 @@ async def on_voice_state_update(member, before, after):
     :return:
     """
     global isConnected
+    FFMPEG_OPTS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 
     if member.bot:
         #print("[INFO] self event detection")
         return
     
     voice_channel = await bot.fetch_channel(voice_channel_id)
-    member_ids = len(voice_channel.voice_states.keys())
-
     debug_channel = await bot.fetch_channel(text_channel_id)
 
-    await debug_channel.send('] voice #' + voice_channel_id + ' member count: ' + str(member_ids))
+    member_ids = len(voice_channel.voice_states.keys())
+
+    #await debug_channel.send('] voice #' + voice_channel_id + ' member count: ' + str(member_ids))
 
     if member_ids == 1 and isConnected == False:
         isConnected = True
         await debug_channel.send('] connecting to #' + voice_channel_id)
-        voiceChannel = await voice_channel.connect()
-
-        player = voice_channel.play(discord.FFmpegPCMAudio(os.environ['url'])
-        while not player.is_done():
-            await asyncio.sleep(1)
+        voice_client = await voice_channel.connect()
+        player = voice_client.play(discord.FFmpegPCMAudio(os.environ['url'], **FFMPEG_OPTS))
         return
 
     if member_ids == 1 and isConnected == True:
         isConnected = False
         await debug_channel.send('] disconnecting from #' + voice_channel_id)
-        for x in bot.voice_clients:
-            await x.disconnect()
+        for voice_client in bot.voice_clients:
+            await voice_client.disconnect()
         return
 
 # Start the bot with multiprocess compatiblity
