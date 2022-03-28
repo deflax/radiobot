@@ -104,7 +104,7 @@ async def on_voice_state_update(member, before, after):
 
     #await debug_channel.send('] voice #' + voice_channel_id + ' member count: ' + str(member_ids))
 
-    if member_ids > 1 and isConnected == False:
+    if member_ids > 0 and isConnected == False:
         isConnected = True
         await debug_channel.send('] connecting to #' + voice_channel_id)
         voice_client = await voice_channel.connect()
