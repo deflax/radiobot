@@ -92,6 +92,7 @@ async def on_voice_state_update(member, before, after):
     """
     global isConnected
     FFMPEG_OPTS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
+    member_msg = None
 
     if member.bot:
         #print("[INFO] self event detection")
@@ -118,21 +119,21 @@ async def on_voice_state_update(member, before, after):
     if prev_chan == next_chan:
         print('[INFO] ' + str(member.nick) + ' activity')
     else:
-        if member_msg:
+        if member_msg is not None:
             print('[INFO] ' + member_msg)
             await debug_channel.send('] ' + member_msg)
 
     if member_ids > 0 and isConnected == False:
         isConnected = True
         voice_client = await voice_channel.connect()
-        voice_source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(source, **FFMPEG_OPTS))
-        voice_source.volume = 50
-        player = voice_client.play(voice_source)
+        voice_client.play(discord.FFmpegPCMAudio(source, **FFMPEG_OPTS))
+        voice_client.source = discord.PCMVolumeTransformer(voice_client.source)
+        voice_client.source.volume = 10.0
         return
 
     if member_ids == 1 and isConnected == True:
         isConnected = False
-        await debug_channel.send('] sleeping. :satellite_orbital:')
+        #await debug_channel.send('] sleeping. :satellite_orbital:')
         for voice_client in bot.voice_clients:
             await voice_client.disconnect()
         return
