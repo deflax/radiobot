@@ -128,7 +128,7 @@ async def on_voice_state_update(member, before, after):
         voice_client = await voice_channel.connect()
         voice_client.play(discord.FFmpegPCMAudio(source, **FFMPEG_OPTS))
         voice_client.source = discord.PCMVolumeTransformer(voice_client.source)
-        voice_client.source.volume = 10.0
+        voice_client.source.volume = 0.3
         return
 
     if member_ids == 1 and isConnected == True:
