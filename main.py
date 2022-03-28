@@ -22,19 +22,21 @@ bot = commands.Bot(command_prefix='!', description=description)
 # Initialize some global variables
 voice_client = None
 text_channel = None
-isPlaying = False
+isConnected = False
 
 @bot.event
 async def on_ready():
-    print('Logged in as ' + bot.user.name + ' #' + str(bot.user.id))
+    print('[INFO] Logged in as ' + bot.user.name + ' #' + str(bot.user.id))
 
     # get channels
-    #voice_channel = bot.get_channel(voice_channel_id)
-    #text_channel = bot.get_channel(text_channel_id)
-    #if not voice_channel:
-    #    print("No voice channel " + voice_channel_id + " found!")
-    #if not text_channel:
-    #    print("No text channel " + text_channel_id + " found!")
+    voice_channel = await bot.fetch_channel(voice_channel_id)
+    debug_channel = await bot.fetch_channel(text_channel_id)
+    if not voice_channel:
+        print("[WARN] No voice channel " + voice_channel_id + " found!")
+    if not debug_channel:
+        print("[WARN] No text channel " + text_channel_id + " found!")
+
+    await debug_channel.send('] ready.')
 
 @bot.event
 async def on_message(message):
@@ -63,28 +65,26 @@ async def on_voice_state_update(member, before, after):
     :param after: The member as they are after the change.
     :return:
     """
-    #print('before: ' + str(before))
-    #print('after: ' + str(after))
-    #return
+    global isConnected
     
-    if member.bot:
-        print("self event detection")
-        return
-    
-    debug_channel = bot.get_channel(text_channel_id)
-    voice_channel = bot.get_channel(voice_channel_id)
-    member_ids = voice_channel.voice_states.keys()
-    
-    await debug_channel.send('voice activity')
-    return    
+    voice_channel = await bot.fetch_channel(voice_channel_id)
+    member_ids = len(voice_channel.voice_states.keys())
 
-    if str(after.channel.id) == voice_channel_id:
-        print("Connecting to voice channel " + voice_channel_id)
+    debug_channel = await bot.fetch_channel(text_channel_id)
+
+    if member_ids > 0:
+        await debug_channel.send('] voice activity.  voice #' + voice_channel_id + ' member count: ' + str(member_ids))
+
+    if member_ids > 1 and not isConnected:
+        await debug_channel.send('] connecting to #' + voice_channel_id)
         voiceChannel = await voice_channel.connect()
-   
-        print("Disconnecting from voice channel " + voice_channel_id)
-        voiceChannel = await after.channel.connect()
+        isConnected = True
+
+    if member_ids == 1 and isConnected:
+        await debug_channel.send('] disconnecting from #' + voice_channel_id)
+        voiceChannel = await voice_channel.connect()
         await voiceChannel.disconnect()
+        isConnected = False
 
 # Start the bot with multiprocess compatiblity
 if __name__ == "__main__":
