@@ -82,6 +82,10 @@ async def on_voice_state_update(member, before, after):
         isConnected = True
         await debug_channel.send('] connecting to #' + voice_channel_id)
         voiceChannel = await voice_channel.connect()
+
+        player = voice_channel.play(discord.FFmpegPCMAudio(os.environ['url'])
+        while not player.is_done():
+            await asyncio.sleep(1)
         return
 
     if member_ids == 1 and isConnected == True:
