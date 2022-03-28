@@ -9,9 +9,6 @@ import discord
 from discord.ext import commands
 import urllib.request as urllib2
 
-bot_version = os.environ['version']
-print('radiobot ' + bot_version + ' starting')
-
 login_token = os.environ['token']
 voice_channel_id = os.environ['channel_voice']
 text_channel_id = os.environ['channel_text']
@@ -21,16 +18,14 @@ source = os.environ['url']
 description = '''Radiobot'''
 bot = commands.Bot(command_prefix='!', description=description)
 
-# Initialize opus
-#if not discord.opus.is_loaded():
-#    discord.opus.load_opus('opus')
-
 # Initialize some global variables
 voice_client = None
 text_channel = None
 isConnected = False
 encoding = 'latin1'
+bot_version = '0.2'
 
+print('radiobot ' + bot_version + ' starting')
 
 @bot.event
 async def on_ready():
