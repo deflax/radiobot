@@ -25,7 +25,7 @@ isConnected = False
 encoding = 'latin1'
 bot_version = '0.2'
 
-print('radiobot ' + bot_version + ' starting')
+print('[INFO] radiobot ' + bot_version + ' starting')
 
 @bot.event
 async def on_ready():
