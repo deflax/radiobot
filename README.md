@@ -4,6 +4,7 @@
 
 * Live radio re-streaming to voice channels.
 * Automatically turned on/off when someone joins/leaves the bound channel.
+* Shows ICY StreamTITLE
 * Other cool things.
 
 ## Running using Docker from the repo
