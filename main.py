@@ -105,10 +105,8 @@ async def on_voice_state_update(member, before, after):
         prev_chan = "not_found"
     else:
         prev_chan = str(before.channel.id)
-    if prev_chan == str(voice_channel_id):
-        member_msg = str(member.nick) + ' is back in the void :cyclone:'
-        print('[INFO] ' + member_msg)
-        await debug_channel.send('] ' + member_msg)
+    #if prev_chan == str(voice_channel_id):
+    #    member_msg = str(member.nick) + ' is back in the void :cyclone:'
 
     if after.channel is None:
         next_chan = "not_found"
@@ -116,19 +114,25 @@ async def on_voice_state_update(member, before, after):
         next_chan = str(after.channel.id)
     if next_chan == str(voice_channel_id):
         member_msg = str(member.nick) + ' enjoys! :satellite:'
-        print('[INFO] ' + member_msg)
-        await debug_channel.send('] ' + member_msg)
+
+    if prev_chan == next_chan:
+        print('[INFO] ' + str(member.nick) + ' activity')
+    else:
+        if member_msg:
+            print('[INFO] ' + member_msg)
+            await debug_channel.send('] ' + member_msg)
 
     if member_ids > 0 and isConnected == False:
         isConnected = True
-        #await debug_channel.send('] connecting to #' + voice_channel_id + ' :satellite_orbital:')
         voice_client = await voice_channel.connect()
-        player = voice_client.play(discord.FFmpegPCMAudio(source, **FFMPEG_OPTS))
+        voice_source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(source, **FFMPEG_OPTS))
+        voice_source.volume = 50
+        player = voice_client.play(voice_source)
         return
 
     if member_ids == 1 and isConnected == True:
         isConnected = False
-        #await debug_channel.send('] disconnecting from #' + voice_channel_id + ' :satellite_orbital:')
+        await debug_channel.send('] sleeping. :satellite_orbital:')
         for voice_client in bot.voice_clients:
             await voice_client.disconnect()
         return
