@@ -107,14 +107,17 @@ async def on_voice_state_update(member, before, after):
         prev_chan = str(before.channel.id)
     if prev_chan == str(voice_channel_id):
         member_msg = str(member.nick) + ' is in the void :eight_pointed_black_star:'
+        print('[INFO] ' + member_msg)
+        await debug_channel.send(member_msg)
+
     if after.channel is None:
         next_chan = "not_found"
     else:
         next_chan = str(after.channel.id)
     if next_chan == str(voice_channel_id):
         member_msg = str(member.nick) + ' enjoys! :star:'
-    print('[INFO] ' + member_msg)
-    #await debug_channel.send(member_msd)
+        print('[INFO] ' + member_msg)
+        await debug_channel.send(member_msg)
 
     if member_ids > 0 and isConnected == False:
         isConnected = True
