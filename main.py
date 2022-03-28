@@ -78,10 +78,9 @@ async def on_message(message):
         else:
             print('no title found')
             return
-        meta = (title.decode(encoding, errors='replace'))
-
-        metastar = meta.split("*", 1)[0]
-        await message.channel.send('] ' + meta)
+        meta = title.decode(encoding, errors='replace')
+        metasplit = meta.split('*', 1)[0]
+        await message.channel.send('] ' + metasplit)
 
 @bot.event
 async def on_voice_state_update(member, before, after):
