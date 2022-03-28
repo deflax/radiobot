@@ -13,4 +13,4 @@
 2. `cp .env.dist .env`
 3. `vim .env`
 4. `docker-compose up -d --build --remove-orphans`
-5. `docker-compose logs --follow --tail 100`
+5. `docker-compose logs --follow --tail 100 --timestamps`

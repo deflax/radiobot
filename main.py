@@ -103,8 +103,12 @@ async def on_voice_state_update(member, before, after):
     member_ids = len(voice_channel.voice_states.keys())
 
     try:
+        if str(before.channel.id) == str(voice_channel_id):
+            member_msg = str(member.nick) + ' is in the void :eight_pointed_black_star:'
         if str(after.channel.id) == str(voice_channel_id):
-            await debug_channel.send(str(member.nick) + ' enjoys! :eight_pointed_black_star:')
+            member_msg = str(member.nick) + ' enjoys! :star:'
+        print('[INFO] ' + member_msg)
+        #await debug_channel.send(member_msd)
     except:
         pass
 
